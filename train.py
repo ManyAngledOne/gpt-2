@@ -9,6 +9,7 @@ import numpy as np
 import tensorflow as tf
 import random
 import time
+import itertools
 
 import model, sample, encoder
 
@@ -73,11 +74,11 @@ class Sampler(object):
 
     def __init__(self, chunks):
         self.chunks = chunks
-        self.total_size = sum(chunk.shape[0] for chunk in chunks)
-        self.boundaries = [0]
-        for i in range(len(chunks)):
-            self.boundaries.append(self.boundaries[-1] + chunks[i].shape[0])
-
+        chunk_sizes = [chunk.shape[0] for chunk in chunks]
+        self.boundaries = list(itertools.accumulate(chunk_sizes))
+        self.total_size = self.boundaries[-1]
+        
+        
     def sample(self, length):
         assert length < self.total_size // len(
             self.chunks
