@@ -74,7 +74,7 @@ class Sampler(object):
 
     def __init__(self, chunks):
         self.chunks = chunks
-        chunk_sizes = [chunk.shape[0] for chunk in chunks]
+        chunk_sizes = [0]+[chunk.shape[0] for chunk in chunks]
         self.boundaries = list(itertools.accumulate(chunk_sizes))
         self.total_size = self.boundaries[-1]
         
