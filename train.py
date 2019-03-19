@@ -202,7 +202,7 @@ def train_main(dataset,
             maketree(os.path.join(SAMPLE_DIR, run_name))
             with open(
                     os.path.join(SAMPLE_DIR, run_name,
-                                 'samples-{}').format(counter), 'w') as fp:
+                                 'samples-{}.txt').format(counter), 'w') as fp:
                 fp.write('\n'.join(all_text))
 
         avg_loss = (0.0, 0.0)
